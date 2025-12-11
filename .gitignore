@@ -21,3 +21,9 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+# OAuth Secrets
+secret
+
+# Swagger API Docs
+storage/api-docs/
+

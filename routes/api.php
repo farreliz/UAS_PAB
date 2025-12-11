@@ -3,22 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\GoApiController;
 
-// Public endpoint untuk mendapatkan token (Client Credentials Grant)
-Route::post('/oauth/token', function () {
-    // Handled by Passport - route ini dihandle oleh package Passport
-})->middleware('throttle:60,1');
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
-// API Routes yang dilindungi dengan Passport Authentication
-Route::middleware('auth:api')->group(function () {
-    // Endpoint 1: Get Weather
+Route::middleware('api.token')->group(function () {
+    // Original 4 endpoints
     Route::get('/weather', [GoApiController::class, 'getWeather']);
-    
-    // Endpoint 2: Get Currency
     Route::get('/currency', [GoApiController::class, 'getCurrency']);
-    
-    // Endpoint 3: Get News
     Route::get('/news', [GoApiController::class, 'getNews']);
-    
-    // Endpoint 4: Post Data
     Route::post('/data', [GoApiController::class, 'postData']);
+
+    // New 4 Stock Market endpoints
+    Route::get('/stock/price', [GoApiController::class, 'getStockPrice']);
+    Route::get('/stock/profile', [GoApiController::class, 'getStockProfile']);
+    Route::get('/stock/historical', [GoApiController::class, 'getStockHistorical']);
+    Route::get('/stock/movers', [GoApiController::class, 'getStockMovers']);
 });

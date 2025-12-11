@@ -3,23 +3,15 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\GoApiService;
+use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        $this->app->singleton(GoApiService::class, function ($app) {
-            return new GoApiService();
-        });
+        Passport::ignoreRoutes();
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         //

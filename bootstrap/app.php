@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\CheckPassportToken;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,14 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Enable stateful API middleware for Passport
-        $middleware->statefulApi();
-        
-        // Register custom middleware alias
         $middleware->alias([
-            'passport' => CheckPassportToken::class,
+            'api.token' => \App\Http\Middleware\ApiTokenMiddleware::class,
         ]);
     })
+    ->withProviders([
+        \L5Swagger\L5SwaggerServiceProvider::class,
+    ])
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
