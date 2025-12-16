@@ -2,10 +2,6 @@
 
 Dokumentasi lengkap mengenai alur kerja, arsitektur sistem, dan flow diagram dari UAS API dengan OAuth2 Client Credentials Grant (Machine to Machine).
 
-**Author:** Rifki Setiawan  
-**Course:** Pengembangan Aplikasi Bisnis - UAS 2025  
-**Framework:** Laravel 11  
-**Authentication:** Laravel Passport OAuth2
 
 ---
 
